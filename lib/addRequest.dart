@@ -114,21 +114,18 @@ class _AddRequestState extends State<addRequest> {
       Icons.person: "Profile",
     };
 
+     //Remove duplicate code
     Future<void> _onItemTapped(int index) async {
       if (widget.userType == 'Special Need User') {
         if (index == 0) {
-          var nav = const homePage();
-          alertDialog(nav);
+          alertDialog(const homePage());
         } else if (index == 1) {
-          var nav = Tts(userType: widget.userType);
-          alertDialog(nav);
+          alertDialog(Tts(userType: widget.userType));
         } else if (index == 2) {
-          var nav = addRequest(userType: widget.userType);
-          alertDialog(nav);
+          alertDialog(addRequest(userType: widget.userType));
         } else if (index == 3) {
-          var nav = userProfile(
-              userType: widget.userType, selectedTab: 0, selectedSubTab: 0);
-          alertDialog(nav);
+          alertDialog(userProfile(
+              userType: widget.userType, selectedTab: 0, selectedSubTab: 0));
         }
       }
     }
