@@ -210,7 +210,6 @@ class _requestPageState extends State<requestPage> {
     bool isPending = false;
     bool isSN = false;
     bool isVol = false;
-    bool viewAcceptButtom = true;
 
     Future<String> getLocationAsString(var lat, var lng) async {
       List<Placemark> placemark = await placemarkFromCoordinates(lat, lng);

@@ -9,10 +9,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'MapView.dart';
 import 'chatPage.dart';
 import 'requestWidget.dart';
-import 'services/localNotification.dart';
 
 class viewRequests extends StatefulWidget {
   final String userType;
@@ -47,7 +45,7 @@ class _AddRequestState extends State<viewRequests>
         .then((currloc) {
       setState(() {
         currentLocation = currloc;
-        mapToggle = true;
+        // mapToggle = true;
       });
     });
   }
@@ -357,7 +355,7 @@ class _AddRequestState extends State<viewRequests>
   final Storage storage = Storage();
   // starting here
   var currentLocation;
-  var currentLocation1;
+
   bool isEnabled = false;
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
   List<Marker> allMarkers = [];

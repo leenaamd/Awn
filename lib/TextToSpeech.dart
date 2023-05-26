@@ -24,7 +24,6 @@ class _TtsState extends State<Tts> {
   ScrollController _scrollController = ScrollController();
   bool flag = false;
   bool flag1 = false;
-  String waitMessage = "";
   bool showRed = false;
 
   NotificationService notificationService = NotificationService();
@@ -315,7 +314,6 @@ class _TtsState extends State<Tts> {
   int _selectedIndex = 1;
 
   Widget textArea() {
-    var textLength = 0;
     var MaxLength = 250;
 
     return Stack(children: [

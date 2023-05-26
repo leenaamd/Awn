@@ -32,7 +32,6 @@ class addPost extends StatefulWidget {
 }
 
 TextEditingController nameController = TextEditingController();
-TextEditingController contactInfoController = TextEditingController();
 TextEditingController descriptionController = TextEditingController();
 TextEditingController numberController = TextEditingController();
 TextEditingController websiteController = TextEditingController();
@@ -99,7 +98,6 @@ class _MyStatefulWidgetState extends State<addPost> {
   var selectedCategory;
 
   var editImg = '';
-  int _selectedIndex = 2;
   final Storage storage = Storage();
   bool previewImage = false;
   var imagePath, memoryPath;
