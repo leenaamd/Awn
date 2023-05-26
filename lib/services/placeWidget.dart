@@ -407,27 +407,26 @@ class PlaceState extends State<Place> {
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
-                                                        builder: (context) => editPost(
-                                                            userType:
-                                                                widget.userType,
-                                                            name: data['name'],
-                                                            description: data[
-                                                                'description'],
-                                                            number: data[
-                                                                'Phone number'],
-                                                            website:
-                                                                data['Website'],
-                                                            category: data[
-                                                                'category'],
-                                                            docId:
-                                                                data['docId'],
-                                                            oldImg: data['img'],
-                                                            latitude: data[
-                                                                'latitude'],
-                                                            longitude: data[
-                                                                'longitude'],
-                                                            userId:
-                                                                data['userId']),
+                                                        builder: (context) =>
+                                                            editPost(
+                                                          userType:
+                                                              widget.userType,
+                                                          name: data['name'],
+                                                          description: data[
+                                                              'description'],
+                                                          number: data[
+                                                              'Phone number'],
+                                                          website:
+                                                              data['Website'],
+                                                          category:
+                                                              data['category'],
+                                                          docId: data['docId'],
+                                                          oldImg: data['img'],
+                                                          latitude:
+                                                              data['latitude'],
+                                                          longitude:
+                                                              data['longitude'],
+                                                        ),
                                                       ));
                                                 }),
                                                 child: Container(

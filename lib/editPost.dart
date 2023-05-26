@@ -46,7 +46,6 @@ class editPost extends StatefulWidget {
   final String oldImg;
   final String latitude;
   final String longitude;
-  final String userId;
   const editPost(
       {Key? key,
       required this.userType,
@@ -58,8 +57,7 @@ class editPost extends StatefulWidget {
       required this.docId,
       required this.oldImg,
       required this.latitude,
-      required this.longitude,
-      required this.userId})
+      required this.longitude})
       : super(key: key);
 
   @override
@@ -188,7 +186,7 @@ class _MyStatefulWidgetState extends State<editPost> {
             Icons.person: "Profile",
           };
 
-      //Remove duplicate code
+    //Remove duplicate code
     Future<void> _onItemTapped(int index) async {
       if (widget.userType == 'Special Need User') {
         if (index == 0) {
