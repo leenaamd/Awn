@@ -188,60 +188,63 @@ class _MyStatefulWidgetState extends State<editPost> {
             Icons.person: "Profile",
           };
 
+      //Remove duplicate code
     Future<void> _onItemTapped(int index) async {
       if (widget.userType == 'Special Need User') {
         if (index == 0) {
-          var nav = const homePage();
           if (isEdited) {
-            alertDialog(nav);
+            alertDialog(const homePage());
           } else {
             Navigator.pushReplacement(
               context,
               PageRouteBuilder(
-                pageBuilder: (context, animation1, animation2) => nav,
+                pageBuilder: (context, animation1, animation2) =>
+                    const homePage(),
                 transitionDuration: const Duration(seconds: 1),
                 reverseTransitionDuration: Duration.zero,
               ),
             );
           }
         } else if (index == 1) {
-          var nav = Tts(userType: widget.userType);
           if (isEdited) {
-            alertDialog(nav);
+            alertDialog(Tts(userType: widget.userType));
           } else {
             Navigator.pushReplacement(
               context,
               PageRouteBuilder(
-                pageBuilder: (context, animation1, animation2) => nav,
+                pageBuilder: (context, animation1, animation2) =>
+                    Tts(userType: widget.userType),
                 transitionDuration: const Duration(seconds: 1),
                 reverseTransitionDuration: Duration.zero,
               ),
             );
           }
         } else if (index == 2) {
-          var nav = addRequest(userType: widget.userType);
           if (isEdited) {
-            alertDialog(nav);
+            alertDialog(addRequest(userType: widget.userType));
           } else {
             Navigator.pushReplacement(
               context,
               PageRouteBuilder(
-                pageBuilder: (context, animation1, animation2) => nav,
+                pageBuilder: (context, animation1, animation2) =>
+                    addRequest(userType: widget.userType),
                 transitionDuration: const Duration(seconds: 1),
                 reverseTransitionDuration: Duration.zero,
               ),
             );
           }
         } else if (index == 3) {
-          var nav = userProfile(
-              userType: widget.userType, selectedTab: 0, selectedSubTab: 0);
           if (isEdited) {
-            alertDialog(nav);
+            alertDialog(userProfile(
+                userType: widget.userType, selectedTab: 0, selectedSubTab: 0));
           } else {
             Navigator.pushReplacement(
               context,
               PageRouteBuilder(
-                pageBuilder: (context, animation1, animation2) => nav,
+                pageBuilder: (context, animation1, animation2) => userProfile(
+                    userType: widget.userType,
+                    selectedTab: 0,
+                    selectedSubTab: 0),
                 transitionDuration: const Duration(seconds: 1),
                 reverseTransitionDuration: Duration.zero,
               ),
@@ -250,43 +253,45 @@ class _MyStatefulWidgetState extends State<editPost> {
         }
       } else if (widget.userType == 'Volunteer') {
         if (index == 0) {
-          var nav = const homePage();
           if (isEdited) {
-            alertDialog(nav);
+            alertDialog(const homePage());
           } else {
             Navigator.pushReplacement(
               context,
               PageRouteBuilder(
-                pageBuilder: (context, animation1, animation2) => nav,
+                pageBuilder: (context, animation1, animation2) =>
+                    const homePage(),
                 transitionDuration: const Duration(seconds: 1),
                 reverseTransitionDuration: Duration.zero,
               ),
             );
           }
         } else if (index == 1) {
-          var nav = viewRequests(userType: widget.userType, reqID: '');
           if (isEdited) {
-            alertDialog(nav);
+            alertDialog(viewRequests(userType: widget.userType, reqID: ''));
           } else {
             Navigator.pushReplacement(
               context,
               PageRouteBuilder(
-                pageBuilder: (context, animation1, animation2) => nav,
+                pageBuilder: (context, animation1, animation2) =>
+                    viewRequests(userType: widget.userType, reqID: ''),
                 transitionDuration: const Duration(seconds: 1),
                 reverseTransitionDuration: Duration.zero,
               ),
             );
           }
         } else if (index == 2) {
-          var nav = userProfile(
-              userType: widget.userType, selectedTab: 0, selectedSubTab: 0);
           if (isEdited) {
-            alertDialog(nav);
+            alertDialog(userProfile(
+                userType: widget.userType, selectedTab: 0, selectedSubTab: 0));
           } else {
             Navigator.pushReplacement(
               context,
               PageRouteBuilder(
-                pageBuilder: (context, animation1, animation2) => nav,
+                pageBuilder: (context, animation1, animation2) => userProfile(
+                    userType: widget.userType,
+                    selectedTab: 0,
+                    selectedSubTab: 0),
                 transitionDuration: const Duration(seconds: 1),
                 reverseTransitionDuration: Duration.zero,
               ),
