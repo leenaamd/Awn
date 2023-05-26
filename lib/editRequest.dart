@@ -431,26 +431,6 @@ class _EditRequestState extends State<editRequest> {
     return int.parse(min);
   }
 
-  String getEndDateFromDb() {
-    String dateFromDb =
-        widget.endDate.substring(0, 10).replaceAll(RegExp('[^0-9]'), '');
-    print('dateFromDb $dateFromDb');
-    return dateFromDb;
-    // DateTime dateFromDb = DateTime.parse(d);
-  }
-
-  int getEndHourFromDb() {
-    String hour = widget.endDate.substring(11, 13);
-    print(hour);
-    return int.parse(hour);
-  }
-
-  int getEndMinuteFromDb() {
-    String min = widget.endDate.substring(15, 17);
-    print(min);
-    return int.parse(min);
-  }
-
   late DateTime selectedDate = DateTime.parse(getDateFromDb());
   late TimeOfDay selectedTime =
       TimeOfDay(hour: getHourFromDb(), minute: getMinuteFromDb());

@@ -778,22 +778,6 @@ class _requestPageState extends State<requestPage> {
       return Colors.white;
   }
 
-  String getStatus(String stat, String docId) {
-    if (stat == 'Pending') {
-      final user = FirebaseAuth.instance.currentUser!;
-      String userId = user.uid;
-
-      final postID =
-          FirebaseFirestore.instance.collection('requests').doc(docId);
-
-      postID.update({
-        'status': 'Expired',
-      });
-      return 'Expired';
-    }
-    return stat;
-  }
-
   void ConfermationDelet() {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(

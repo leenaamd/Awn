@@ -1357,55 +1357,6 @@ class _MyStatefulWidgetState extends State<editPost> {
     isEdited = false;
   }
 
-  Future<dynamic> alertDialogBack() {
-    return showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        content: const Text(
-          "Discard the changes you made?",
-          textAlign: TextAlign.left,
-        ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(ctx).pop();
-            },
-            child: Container(
-              padding: const EdgeInsets.all(14),
-              child: const Text("Keep editing"),
-            ),
-          ),
-          TextButton(
-            onPressed: () async {
-              // int count = 0;
-              // var nav = Navigator.of(context);
-              // nav.pop();
-              // nav.pop();
-
-              //  Navigator.popUntil((_) => count++ >= 2);
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) => Place(
-              //           userId: widget.userId,
-              //           category: widget.category,
-              //           status: 'Pending',
-              //           userName: userName,
-              //           userType: widget.u),
-              //     ));
-              clearForm();
-            },
-            child: Container(
-              padding: const EdgeInsets.all(14),
-              child: const Text("Discard",
-                  style: TextStyle(color: Color.fromARGB(255, 164, 10, 10))),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Future<dynamic> alertDialog(var nav) {
     return showDialog(
       context: context,
