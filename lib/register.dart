@@ -23,27 +23,28 @@ class register extends StatefulWidget {
   _registerState createState() => _registerState();
 }
 
-TextEditingController emailController = TextEditingController();
-TextEditingController passwordController = TextEditingController();
-TextEditingController cofirmPasswordController = TextEditingController();
-TextEditingController nameController = TextEditingController();
-TextEditingController numberController = TextEditingController();
-TextEditingController bioController = TextEditingController();
-TextEditingController DOBController = TextEditingController();
+TextEditingController emailTextController = TextEditingController();
+TextEditingController passwordTextController = TextEditingController();
+TextEditingController confirmPasswordTextController = TextEditingController();
+TextEditingController nameTextController = TextEditingController();
+TextEditingController numberTextController = TextEditingController();
+TextEditingController bioTextController = TextEditingController();
+TextEditingController dobTextController = TextEditingController();
 
-String group = "Female";
-String group1 = "Special Need User";
-bool blind = false;
-bool mute = false;
-bool deaf = false;
-bool physical = false;
-bool other = false;
+String genderGroup = "Female";
+String userTypeGroup = "Special Need User";
 
-bool inProgress = false;
+bool isUserBlind = false;
+bool isUserMute = false;
+bool isUserDeaf = false;
+bool isUserPhysicallyDisabled = false;
+bool hasOtherDisabilities = false;
+
+bool isProcessInProgress = false;
 
 String typeId = "";
 String password = "";
-String confirm_password = "";
+String confirmPassword = "";
 
 class _registerState extends State<register> {
   CollectionReference DisabilityType =
@@ -56,15 +57,15 @@ class _registerState extends State<register> {
   bool _passwordVisible = false;
   @override
   void clearForm() {
-    group = "Female";
-    group1 = "Special Need User";
-    emailController.text = "";
-    passwordController.text = "";
-    cofirmPasswordController.text = "";
-    nameController.text = "";
-    numberController.text = "";
-    bioController.text = "";
-    DOBController.text = '';
+    genderGroup = "Female";
+    userTypeGroup = "Special Need User";
+    emailTextController.text = "";
+    passwordTextController.text = "";
+    confirmPasswordTextController.text = "";
+    nameTextController.text = "";
+    numberTextController.text = "";
+    bioTextController.text = "";
+    dobTextController.text = '';
 
     DisabilityType.doc('HearingImpaired').update({'Checked': false});
     DisabilityType.doc('PhysicallyImpaired').update({'Checked': false});
@@ -72,13 +73,13 @@ class _registerState extends State<register> {
     DisabilityType.doc('VocallyImpaired').update({'Checked': false});
     DisabilityType.doc('Other').update({'Checked': false});
 
-    blind = false;
-    mute = false;
-    deaf = false;
-    physical = false;
-    other = false;
+    isUserBlind = false;
+    isUserMute = false;
+    isUserDeaf = false;
+    isUserPhysicallyDisabled = false;
+    hasOtherDisabilities = false;
     typeId = "";
-    inProgress = false;
+    isProcessInProgress = false;
 
     invalidEmail = false;
     emailErrorMessage = '';
@@ -99,7 +100,7 @@ class _registerState extends State<register> {
     if (selected != null && selected != selectedDate) {
       setState(() {
         selectedDate = selected;
-        DOBController.text =
+        dobTextController.text =
             DateFormat('yyyy-MM-dd').format(selected).toString();
       });
     }
@@ -159,7 +160,9 @@ class _registerState extends State<register> {
         automaticallyImplyLeading: false,
       ),
       body: Stack(children: [
-        inProgress ? Center(child: CircularProgressIndicator()) : SizedBox(),
+        isProcessInProgress
+            ? Center(child: CircularProgressIndicator())
+            : SizedBox(),
         // decoration: BoxDecoration(
         //     gradient: LinearGradient(colors: [
         //   Colors.cyanAccent.shade100,
@@ -170,7 +173,7 @@ class _registerState extends State<register> {
 
         AnimatedOpacity(
           duration: Duration(milliseconds: 500),
-          opacity: inProgress ? 0.2 : 1,
+          opacity: isProcessInProgress ? 0.2 : 1,
           child: Padding(
               // height: 2000,
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -421,7 +424,7 @@ class _registerState extends State<register> {
                                         if (_formKey2.currentState!
                                             .validate()) {
                                           setState(() {
-                                            inProgress = true;
+                                            isProcessInProgress = true;
                                           });
                                           await signUp();
                                         }
@@ -527,13 +530,13 @@ class _registerState extends State<register> {
                                       type_index = 0;
                                       type_edit = 'Special Need User';
                                       setState(() {
-                                        group1 = 'Special Need User';
+                                        userTypeGroup = 'Special Need User';
                                       });
                                     } else {
                                       type_index = 1;
                                       type_edit = 'Volunteer';
                                       setState(() {
-                                        group1 = 'Volunteer';
+                                        userTypeGroup = 'Volunteer';
                                       });
                                     }
                                   },
@@ -543,7 +546,7 @@ class _registerState extends State<register> {
                                 ),
                                 //Email
                                 TextFormField(
-                                  controller: emailController,
+                                  controller: emailTextController,
                                   decoration: theme.inputfield(
                                       "Email", "example@example.example"),
                                   autovalidateMode:
@@ -564,7 +567,7 @@ class _registerState extends State<register> {
 
                                 //Password
                                 TextFormField(
-                                  controller: passwordController,
+                                  controller: passwordTextController,
                                   obscureText: !_passwordVisible,
                                   decoration: InputDecoration(
                                     contentPadding: const EdgeInsets.fromLTRB(
@@ -635,7 +638,7 @@ class _registerState extends State<register> {
 
                                 //Confirm Password
                                 TextFormField(
-                                  controller: cofirmPasswordController,
+                                  controller: confirmPasswordTextController,
                                   obscureText: !_passwordVisible,
                                   decoration: InputDecoration(
                                     labelText: "Confirm Password",
@@ -683,11 +686,11 @@ class _registerState extends State<register> {
                                       AutovalidateMode.onUserInteraction,
                                   validator: (value) {
                                     //Wedd's change
-                                    confirm_password = value.toString();
+                                    confirmPassword = value.toString();
                                     //Wedd's change
                                     if (value == null || value.isEmpty) {
                                       return "Please confirm password";
-                                    } else if (confirm_password != password) {
+                                    } else if (confirmPassword != password) {
                                       return "Password not match";
                                     } else {
                                       return null;
@@ -784,14 +787,14 @@ class _registerState extends State<register> {
                                     gender_index = 0;
                                     gender_edit = 'Female';
                                     setState(() {
-                                      group = 'Female';
+                                      genderGroup = 'Female';
                                     });
                                     print('switched to: male');
                                   } else {
                                     gender_index = 1;
                                     gender_edit = 'Male';
                                     setState(() {
-                                      group = 'Male';
+                                      genderGroup = 'Male';
                                     });
                                   }
                                 },
@@ -803,7 +806,7 @@ class _registerState extends State<register> {
                               //DOB
                               TextFormField(
                                 readOnly: true,
-                                controller: DOBController,
+                                controller: dobTextController,
                                 onTap: () {
                                   _selectDate(context);
                                   showDate = false;
@@ -849,7 +852,7 @@ class _registerState extends State<register> {
 
                               //Phone number
                               TextFormField(
-                                controller: numberController,
+                                controller: numberTextController,
                                 keyboardType: TextInputType.number,
                                 inputFormatters: <TextInputFormatter>[
                                   FilteringTextInputFormatter.digitsOnly
@@ -876,12 +879,12 @@ class _registerState extends State<register> {
                               Container(
                                 child: LayoutBuilder(
                                     builder: (context, constraints) {
-                                  if (group1 == "Volunteer") {
+                                  if (userTypeGroup == "Volunteer") {
                                     return TextFormField(
                                       maxLines: 5,
                                       maxLength: 180,
                                       textAlign: TextAlign.left,
-                                      controller: bioController,
+                                      controller: bioTextController,
                                       decoration: InputDecoration(
                                         hintText:
                                             "Enter your bio here.\nTalk briefly about yourself!",
@@ -908,7 +911,8 @@ class _registerState extends State<register> {
                                         }
                                       },
                                     );
-                                  } else if (group1 == 'Special Need User') {
+                                  } else if (userTypeGroup ==
+                                      'Special Need User') {
                                     return Column(
                                       children: [
                                         Row(
@@ -963,31 +967,36 @@ class _registerState extends State<register> {
                                                                     as Map)[
                                                                 'Type'] ==
                                                             'Visually Impaired') {
-                                                          blind = !blind;
+                                                          isUserBlind =
+                                                              !isUserBlind;
                                                         }
                                                         if ((document.data()
                                                                     as Map)[
                                                                 'Type'] ==
                                                             'Vocally Impaired') {
-                                                          mute = !mute;
+                                                          isUserMute =
+                                                              !isUserMute;
                                                         }
                                                         if ((document.data()
                                                                     as Map)[
                                                                 'Type'] ==
                                                             'Hearing Impaired') {
-                                                          deaf = !deaf;
+                                                          isUserDeaf =
+                                                              !isUserDeaf;
                                                         }
                                                         if ((document.data()
                                                                     as Map)[
                                                                 'Type'] ==
                                                             'Physically Impaired') {
-                                                          physical = !physical;
+                                                          isUserPhysicallyDisabled =
+                                                              !isUserPhysicallyDisabled;
                                                         }
                                                         if ((document.data()
                                                                     as Map)[
                                                                 'Type'] ==
                                                             'Other') {
-                                                          other = !other;
+                                                          hasOtherDisabilities =
+                                                              !hasOtherDisabilities;
                                                         }
                                                       },
                                                       title: Text(
@@ -1031,7 +1040,7 @@ class _registerState extends State<register> {
       print("try");
 
       final list = await FirebaseAuth.instance
-          .fetchSignInMethodsForEmail(emailController.text.trim());
+          .fetchSignInMethodsForEmail(emailTextController.text.trim());
 
       if (list.isNotEmpty) {
         setState(() {
@@ -1067,8 +1076,8 @@ class _registerState extends State<register> {
   Future signUp() async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
+        email: emailTextController.text.trim(),
+        password: passwordTextController.text.trim(),
       );
       await saveUser();
 
@@ -1098,34 +1107,38 @@ class _registerState extends State<register> {
 
   FirebaseFirestore db = FirebaseFirestore.instance;
   saveUser() async {
-    String email = emailController.text;
+    String email = emailTextController.text;
     String name = nameController.text;
-    String number = numberController.text;
+    String number = numberTextController.text;
     String age = globals.bDay;
     String disability = "";
-    String bio = bioController.text;
+    String bio = bioTextController.text;
     final user = FirebaseAuth.instance.currentUser!;
     String userId = user.uid;
 
-    if (blind == true && blind != null) disability += " Visually Impaired,";
-    if (mute == true && mute != null) disability += " Vocally Impaired,"; //done
-    if (deaf == true && deaf != null) disability += " Hearing Impaired,"; //done
-    if (physical == true && physical != null)
+    if (isUserBlind == true && isUserBlind != null)
+      disability += " Visually Impaired,";
+    if (isUserMute == true && isUserMute != null)
+      disability += " Vocally Impaired,"; //done
+    if (isUserDeaf == true && isUserDeaf != null)
+      disability += " Hearing Impaired,"; //done
+    if (isUserPhysicallyDisabled == true && isUserPhysicallyDisabled != null)
       disability += " Physically Impaired,"; //done
-    if (other == true && other != null) disability += " Other,"; //done
-    print(other);
+    if (hasOtherDisabilities == true && hasOtherDisabilities != null)
+      disability += " Other,"; //done
+    print(hasOtherDisabilities);
     final userRef = db.collection("users").doc(user.uid);
 
     Map<String, dynamic> userData;
     if (!((await userRef.get()).exists)) {
       await userRef.set({
         "Email": email,
-        "Type": group1,
+        "Type": userTypeGroup,
         "bio": bio,
-        "gender": group,
+        "gender": genderGroup,
         "name": name,
         "phone number": number,
-        "DOB": DOBController.text,
+        "DOB": dobTextController.text,
         "Disability": disability,
         "id": userId,
       });
@@ -1136,7 +1149,7 @@ class _registerState extends State<register> {
           .collection('UserDisabilityType')
           .doc('Visually Impaired')
           .set({
-        'Checked': blind,
+        'Checked': isUserBlind,
         'Type': 'Visually Impaired',
         'order': 'c',
       });
@@ -1147,7 +1160,7 @@ class _registerState extends State<register> {
           .collection('UserDisabilityType')
           .doc('Other')
           .set({
-        'Checked': other,
+        'Checked': hasOtherDisabilities,
         'Type': 'Other',
         'order': 'c',
       });
@@ -1157,7 +1170,7 @@ class _registerState extends State<register> {
           .collection('UserDisabilityType')
           .doc('Vocally Impaired')
           .set({
-        'Checked': mute,
+        'Checked': isUserMute,
         'Type': 'Vocally Impaired',
         'order': 'b',
       });
@@ -1167,7 +1180,7 @@ class _registerState extends State<register> {
           .collection('UserDisabilityType')
           .doc('Hearing Impaired')
           .set({
-        'Checked': deaf,
+        'Checked': isUserDeaf,
         'Type': 'Hearing Impaired',
         'order': 'c',
       });
@@ -1177,12 +1190,12 @@ class _registerState extends State<register> {
           .collection('UserDisabilityType')
           .doc('Physically Impaired')
           .set({
-        'Checked': physical,
+        'Checked': isUserPhysicallyDisabled,
         'Type': 'Physically Impaired',
         'order': 'd',
       }).then((value) {
         setState(() {
-          inProgress = true;
+          isProcessInProgress = true;
         });
       });
     }
