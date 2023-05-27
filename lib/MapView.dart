@@ -15,7 +15,7 @@ class _StationsMap1 extends State<StationsMap1> {
   bool mapToggle = false;
 
   var currentLocation;
-  var currentLocation1;
+
   bool isEnabled = false;
 
   late GoogleMapController mapController;

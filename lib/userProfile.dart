@@ -204,7 +204,8 @@ class UserProfileState extends State<userProfile>
               ),
             );
           }
-        } else if (index == 1) {
+        } 
+        if (index == 1) {
           var nav = Tts(userType: widget.userType);
           if (isEdited) {
             alertDialog(nav);
@@ -218,7 +219,8 @@ class UserProfileState extends State<userProfile>
               ),
             );
           }
-        } else if (index == 2) {
+        } 
+        if (index == 2) {
           var nav = addRequest(userType: widget.userType);
           if (isEdited) {
             alertDialog(nav);
@@ -229,10 +231,11 @@ class UserProfileState extends State<userProfile>
                 pageBuilder: (context, animation1, animation2) => nav,
                 transitionDuration: const Duration(seconds: 1),
                 reverseTransitionDuration: Duration.zero,
-              ),
+              ),3
             );
           }
-        } else if (index == 3) {
+        } 
+        if (index == 3) {
           var nav = userProfile(
               userType: widget.userType, selectedTab: 0, selectedSubTab: 0);
           if (isEdited) {
@@ -248,7 +251,8 @@ class UserProfileState extends State<userProfile>
             );
           }
         }
-      } else if (widget.userType == 'Volunteer') {
+      } 
+      if (widget.userType == 'Volunteer') {
         if (index == 0) {
           var nav = const homePage();
           if (isEdited) {
@@ -263,7 +267,8 @@ class UserProfileState extends State<userProfile>
               ),
             );
           }
-        } else if (index == 1) {
+        } 
+        if (index == 1) {
           var nav = viewRequests(userType: widget.userType, reqID: '');
           if (isEdited) {
             alertDialog(nav);
@@ -277,7 +282,8 @@ class UserProfileState extends State<userProfile>
               ),
             );
           }
-        } else if (index == 2) {
+        } 
+        if (index == 2) {
           var nav = userProfile(
               userType: widget.userType, selectedTab: 0, selectedSubTab: 0);
           if (isEdited) {
