@@ -253,7 +253,8 @@ class TabButtonsState extends State<TabButtons> with TickerProviderStateMixin {
 
     var color;
     var textColor;
-    if (status == 'Denied') {
+    //simplify nestes if condition
+   if (status == 'Denied') {
       color = Colors.red.shade100;
       textColor = Colors.red.shade200;
       list = FirebaseFirestore.instance
@@ -261,26 +262,27 @@ class TabButtonsState extends State<TabButtons> with TickerProviderStateMixin {
           .where('status', isEqualTo: 'Denied')
           .orderBy('date', descending: false)
           .snapshots();
-    } else if (status == 'Pending') {
+    } 
+    if (status == 'Pending') {
       color = Colors.orange.shade100;
       textColor = Colors.orange.shade200;
-
       list = FirebaseFirestore.instance
           .collection('posts')
           .where('status', isEqualTo: 'Pending')
           .orderBy('date', descending: false)
           .snapshots();
-    } else if (status == 'Approved') {
+    } 
+    
+    if (status == 'Approved') {
       color = Colors.green.shade100;
       textColor = Colors.green.shade200;
-
       list = FirebaseFirestore.instance
           .collection('posts')
           .where('status', isEqualTo: 'Approved')
           .orderBy('date', descending: false)
           .snapshots();
     }
-
+    
     return Column(
       children: [
         //! places list
