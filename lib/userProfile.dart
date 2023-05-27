@@ -958,15 +958,19 @@ class UserProfileState extends State<userProfile>
         ]));
   }
 
+  //Simplify nested if condition
   Color getColor(String stat) {
-    if (stat == 'Approved')
+    if (stat == 'Approved') {
       return Colors.green.shade300;
-    else if (stat == 'Pending')
+    } 
+     if (stat == 'Pending') {
       return Colors.orange.shade300;
-    else if (stat == 'Expired')
+    } 
+     if (stat == 'Expired') {
       return Colors.red.shade300;
-    else
+    } 
       return Colors.white;
+    
   }
 
   String getStatus(String stat, String docId) {
