@@ -418,32 +418,7 @@ class ChatPageState extends State<ChatPage>
                                             return SingleChildScrollView(
                                                 child: Column(
                                               children: [
-                                                // your widget's content goes here...
-                                                Chat(
-                                                  message: messages.docs[index]
-                                                      ['text'],
-                                                  isMe: messages.docs[index]
-                                                          ['author'] ==
-                                                      currentUser.uid,
-                                                  time: DateTime
-                                                      .fromMillisecondsSinceEpoch(
-                                                    messages.docs[index]
-                                                        ['createdAt'],
-                                                  ),
-                                                  isRead: messages.docs[index]
-                                                      ['read'],
-                                                  img: messages.docs[index]
-                                                      ['img'],
-                                                  audio: messages.docs[index]
-                                                      ['audio'],
-                                                  audioDuration:
-                                                      messages.docs[index]
-                                                          ['audioDuration'],
-                                                  isPlayerReady: isPlayerReady,
-                                                  isPlaying: isPlaying,
-                                                  audioPlayer: audioPlayer,
-                                                  audioRecorder: audioRecorder,
-                                                ),
+                                                sendToChat(messages, index)
                                               ],
                                             ));
                                           },
@@ -472,29 +447,7 @@ class ChatPageState extends State<ChatPage>
                                           child: SingleChildScrollView(
                                               child: Container(
                                             color: const Color(0xFFfcfffe),
-                                            child: Chat(
-                                              message: messages.docs[index]
-                                                  ['text'],
-                                              isMe: messages.docs[index]
-                                                      ['author'] ==
-                                                  currentUser.uid,
-                                              time: DateTime
-                                                  .fromMillisecondsSinceEpoch(
-                                                messages.docs[index]
-                                                    ['createdAt'],
-                                              ),
-                                              isRead: messages.docs[index]
-                                                  ['read'],
-                                              img: messages.docs[index]['img'],
-                                              audio: messages.docs[index]
-                                                  ['audio'],
-                                              audioDuration: messages
-                                                  .docs[index]['audioDuration'],
-                                              isPlayerReady: isPlayerReady,
-                                              isPlaying: isPlaying,
-                                              audioPlayer: audioPlayer,
-                                              audioRecorder: audioRecorder,
-                                            ),
+                                            child: sendToChat(messages, index),
                                           )),
                                         )
                                       ]);
@@ -516,6 +469,24 @@ class ChatPageState extends State<ChatPage>
                 return const Center(child: CircularProgressIndicator());
               }
             }));
+  }
+
+  Chat sendToChat(messages, int index) {
+    return Chat(
+      message: messages.docs[index]['text'],
+      isMe: messages.docs[index]['author'] == currentUser.uid,
+      time: DateTime.fromMillisecondsSinceEpoch(
+        messages.docs[index]['createdAt'],
+      ),
+      isRead: messages.docs[index]['read'],
+      img: messages.docs[index]['img'],
+      audio: messages.docs[index]['audio'],
+      audioDuration: messages.docs[index]['audioDuration'],
+      isPlayerReady: isPlayerReady,
+      isPlaying: isPlaying,
+      audioPlayer: audioPlayer,
+      audioRecorder: audioRecorder,
+    );
   }
 }
 
